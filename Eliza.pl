@@ -15,7 +15,7 @@ match([ ],Dictionary,[ ]).
 
 %lookup(Key,Dictionary,Value)
 
-pattern([i,am,X],['How',long,have,you,been,1,?]).
+pattern([i,am,1],['How',long,have,you,been,1,?]).
 pattern([1,you,2,me],['What',makes,you,think,'I',2,you,?]).
 pattern([i,like,1],['Does',anyone,else,in,your,family,like,1,?]).
 pattern([i,feel,1],['Do',you,often,feel,that,way,?]).
