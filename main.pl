@@ -144,9 +144,7 @@ in(List) :- read_string(InputL),
   atom_chars(InputS,InputL),
   atomic_list_concat(List," ",InputS),
   %atomic_list_concat(InputP,".",InputS),
-  %atomic_list_concat(List," ",InputP),
-
-  write(List).
+  %atomic_list_concat(List," ",InputP).
 
 talk(Output,UserInput) :- out(Output),in(UserInput).
 
