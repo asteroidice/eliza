@@ -2,9 +2,9 @@ pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat(List, ["Let's talk about you, not me"]) :- direct(X),member(X,List).
 pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
-pat(List, Y) :- rand_school_rep(Y),school(X),member(X,List).
-
+pat(List, Y) :- rand_school_resp(Y),school(X),member(X,List).
 pat(List, Y) :- rand_work_resp(Y),work(X),member(X,List).
+
 pat(List, ["What does love mean to you?"]) :- member(love,List).
 pat(List, ["What exactly is making you feel sad?"]) :- member(sad,List).
 pat(List, ["What seems to be making you upset?"]) :- upset(X),member(X,List).
@@ -71,16 +71,16 @@ school(classmates).
 school(test).
 school(tests).
 
-rand_work_resp(R) :- rand_response(x), N is random(6),
+rand_work_resp(R) :- rand_response(X), N is random(6),
                   nth0(N, [
                     ["Is there a problem at work?"],
                     ["Do you enjoy what you do at work?"],
                     ["What does your job entail?"],
-                    ["Do you find yourself spending all of time in the office?"],
+                    ["Do you find yourself spending a lot of time in the office?"],
                     ["How do you feel about your Boss?"],
                     X
                   ], R).
-                  
+
 rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   nth0(N, [
                   ["Tell", me, more, about, your, family],
@@ -89,7 +89,7 @@ rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   X
                   ], Elem).
 
-rand_school_resp(Elem) :- rand_response(X), N is random(8),
+rand_school_resp(Elem) :- rand_response(X), N is random(11),
                   nth0(N, [
                   ["Tell me more about school."],
                   ["How do you like school?"],
