@@ -1,14 +1,26 @@
-pattern([i,am,X],['How',long,have,you,been,X,?]).
-pattern([X,you,Y,me],['What',makes,you,think,'I',Y,you,?]).
-pattern([i,like,X],['Does',anyone,else,in,your,family,like,X,?]).
-pattern([i,feel,X],['Do',you,often,feel,that,way,?]).
+pat([bye],[bye]).
+pat([hello | _ ], [hello, there]).
+pat([i,am | Rest],[why, are, you | Rest]).
+pat(Anything,[tell,me,more,"."]).
 
-pattern([X,X,Y],['Please',you,tell,me,more,about,X]) :-
- important(X).
-pattern([X],['Please',go,on,'.']).
-important(father).
-important(mother).
-important(sister).
-important(brother).
-important(son).
-important(daughter).
+out([]) :- nl.
+out([Head|Tail]) :- write(Head),write(' '),out(Tail).
+
+my_char_type(46,period) :- !.
+
+read_string(X) :- get0(Y), char_to_array(Y,X).
+
+char_to_array(10,[]) :- !.
+char_to_array(-1,[]) :- !.
+char_to_array(X,[X|Rest]) :- read_string(Rest).
+
+in(List) :- read_string(InputL),atom_chars(InputS,InputL),atomic_list_concat(List," ",InputS),write(List).
+talk(Output,UserInput) :- out(Output),in(UserInput).
+
+eliza :- rap(['Hey there, Please don\'t tell me about your problems. Also I\'m very picky, so please use quotes when you talk.']).
+
+rap([bye]) :- write("Good bye, glad to see you go.").
+rap(Output) :-
+  talk(Output, UserInput),
+  pat(UserInput, NewOutput),
+  rap(NewOutput).

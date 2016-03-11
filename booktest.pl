@@ -1,6 +1,6 @@
-pat([bye | _ ],[bye]).
+pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
-pat(["I", am | Rest],[why, are, you | Rest]).
+pat([i,am | Rest],[why, are, you | Rest]).
 pat(Anything,[tell,me,more,"."]).
 
 out([]) :- nl.
