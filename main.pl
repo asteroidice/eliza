@@ -2,6 +2,8 @@ pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
 pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
+pat(List, ["Why are you feeling sad?"]) :- member(sad,List).
+pat(List, ["What is making you upset?"]) :- upset(X),member(X,List).
 pat(Anything,[tell,me,more,"."]).
 
 family(family).
@@ -22,6 +24,21 @@ family(grandma).
 family(neice).
 family(nephew).
 
+upset(upset).
+upset(angry).
+upset(frustrated).
+upset(annoyed).
+upset(annoy).
+upset(frustrate).
+upset(angrier).
+upset(mad).
+upset(furious).
+upset(annoying).
+upset(frustrating).
+upset(maddening).
+upset(angering).
+upset(infuriating).
+
 rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   nth0(N, [
                   ["Tell", me, more, about, your, family],
@@ -30,13 +47,27 @@ rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   X
                   ], Elem).
 
-rand_response(Elem) :- N is random(4),
+rand_response(Elem) :- starterq(X), N is random(4),
                   nth0(N, [
                   ["Tell me more."],
                   ["Go on"],
                   ["Why?"],
-                  ["How has the last month been going for you?"],
-                  ["Please continue."]
+                  ["Please continue."],
+                  ["Is that how you expect things should be?"],
+                  ["You are so pathetic!"],
+                  ["What would you rather be doing right now?"],
+                  ["Was there something in particular that made you think that?"],
+                  ["How does that make you feel?"],
+                  X
+                  ], Elem).
+
+starterq(Elem) :- N is random(4),
+                  nth0(N, [
+                  ["Help me I'm trapped in a computer!"],
+                  ["How are things going with you?"],
+                  ["What brings you here today?"],
+                  ["What problem brings you here today?"],
+                  ["What are you thinking?"],
                   ], Elem).
 
 
