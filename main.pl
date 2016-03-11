@@ -1,9 +1,25 @@
 pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
-pat(List, [tell,me,more,about,your,family]) :- member(father,List).
+pat(List, [tell,me,more,about,your,family]) :- family(X).
 pat(Anything,[tell,me,more,"."]).
 
+family(sister).
+family(brother).
+family(sibling).
+family(mother).
+family(mom).
+family(father).
+family(dad).
+family(uncle).
+family(aunt).
+family(cousin).
+family(grandfather).
+family(grandpa).
+family(grandmother).
+family(grandma).
+family(neice).
+family(nephew).
 
 out([]) :- nl.
 out([Head|Tail]) :- write(Head),write(' '),out(Tail).
