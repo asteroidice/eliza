@@ -1,7 +1,7 @@
 pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
-pat(List, Rand_fam_resp) :- family(X),member(X,List).
+pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
 pat(Anything,[tell,me,more,"."]).
 
 family(family).
@@ -22,24 +22,22 @@ family(grandma).
 family(neice).
 family(nephew).
 
-Rand_fam_resp :-  N is random(4),
+rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   nth0(N, [
-                  "Tell me more about your family.",
-                  "How would you describe your family?",
-                  "Do you have a good relationship with your parents?",
-                  Rand_response,
-                  "], Elem),
-                  write(Elem).
+                  ["Tell", me, more, about, your, family],
+                  ["How", would, you, describe, your, family],
+                  ["Do you have a good relationship with your parents?"],
+                  X
+                  ], Elem).
 
-Rand_response :- N is random(4),
+rand_response(Elem) :- N is random(4),
                   nth0(N, [
-                  "Tell me more.",
-                  "Go on",
-                  "Why?",
-                  "How has the last month been going for you?",
-                  "Please continue."
-                  "], Elem),
-                  write(Elem).
+                  ["Tell me more."],
+                  ["Go on"],
+                  ["Why?"],
+                  ["How has the last month been going for you?"],
+                  ["Please continue."]
+                  ], Elem).
 
 
 
@@ -56,7 +54,7 @@ char_to_array(X,[X|Rest]) :- read_string(Rest).
 
 in(List) :- read_string(InputL),
   atom_chars(InputS,InputL),
-  atomic_list_concat(InputP," ",InputS),
+  atomic_list_concat(List," ",InputS),
   %atomic_list_concat(InputP," ",InputS),
   %atomic_list_concat(List,".",InputP),
   write(List).
