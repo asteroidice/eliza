@@ -52,11 +52,13 @@ char_to_array(10,[]) :- !.
 char_to_array(-1,[]) :- !.
 char_to_array(X,[X|Rest]) :- read_string(Rest).
 
-in(List) :- read_string(InputL),
+
+in(List) :- read_string(InputLU),
   atom_chars(InputS,InputL),
   atomic_list_concat(List," ",InputS),
-  %atomic_list_concat(InputP," ",InputS),
-  %atomic_list_concat(List,".",InputP),
+  %atomic_list_concat(InputP,".",InputS),
+  %atomic_list_concat(List," ",InputP),
+
   write(List).
 
 talk(Output,UserInput) :- out(Output),in(UserInput).
