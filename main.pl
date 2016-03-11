@@ -1,7 +1,7 @@
 pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
-pat(List, [tell,me,more,about,your,family]) :- family(X).
+pat(List, [tell,me,more,about,your,family]) :- family(X),member(X,List).
 pat(Anything,[tell,me,more,"."]).
 
 family(sister).
