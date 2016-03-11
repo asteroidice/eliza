@@ -3,6 +3,8 @@ pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
 pat(Anything,[tell,me,more,"."]).
 
+pat(List, [tell,me,more,about,your,family]) :- member(father,List).
+
 out([]) :- nl.
 out([Head|Tail]) :- write(Head),write(' '),out(Tail).
 
