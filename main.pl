@@ -3,6 +3,9 @@ pat([hello | _ ], [hello, there]).
 pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
 pat(List, ["What exactly is making you feel sad?"]) :- member(sad,List).
 pat(List, ["What seems to be making you upset?"]) :- upset(X),member(X,List).
+pat(List, ["What does love mean to you?"]) :- member(love,List).
+pat(List, ["Let's talk about you, not me"]) :- direct(X),member(X,List).
+pat(List, Y) :- rand_school_rep(Y),school(X),member(X,List).
 pat([i,am | Rest],[why, are, you | Rest]).
 pat(Anything,X) :- rand_response(X).
 
@@ -39,11 +42,42 @@ upset(maddening).
 upset(angering).
 upset(infuriating).
 
+direct(eliza).
+direct(you).
+direct(counselor).
+direct(therapist).
+
+school(school).
+school(class).
+school(grade).
+school(grades).
+school(classes).
+school(homework).
+school(professor).
+school(classmates).
+school(test).
+school(tests).
+
 rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   nth0(N, [
                   ["Tell", me, more, about, your, family],
                   ["How", would, you, describe, your, family],
                   ["Do you have a good relationship with your parents?"],
+                  X
+                  ], Elem).
+
+rand_school_resp(Elem) :- rand_response(X), N is random(8),
+                  nth0(N, [
+                  ["Tell me more about school."],
+                  ["How do you like school?"],
+                  ["Do you enjoy school?"],
+                  ["Is school feeling stressful for you?"],
+                  ["What do you enjoy most about school?"],
+                  ["What classes are you taking?"],
+                  ["What is your major?"],
+                  ["What do you like to do outside of classes?"],
+                  ["How is the homework load for you?"],
+                  ["Do you like the school you're attending?"],
                   X
                   ], Elem).
 
@@ -54,7 +88,6 @@ rand_response(Elem) :- starterq(X), N is random(10),
                   ["Why?"],
                   ["Please continue."],
                   ["Is that how you expect things should be?"],
-                  ["You are so pathetic!"],
                   ["What would you rather be doing right now?"],
                   ["Was there something in particular that made you think that?"],
                   ["How does that make you feel?"],
