@@ -21,7 +21,7 @@ talk(Output,UserInput) :- out(Output),in(UserInput).
 
 eliza :- rap(['Hey there, I\'m Eliza. How are you feeling right now?']).
 
-rap([bye]) :- write("This has been a good session. Good bye.").
+rap([bye]) :- write("I look forward to seeing you at our next session. Good bye.").
 rap(Output) :-
   talk(Output, UserInput),
   pat(UserInput, NewOutput),
