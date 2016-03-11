@@ -1,9 +1,10 @@
 pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
 pat([i,am | Rest],[why, are, you | Rest]).
-pat(List, [tell,me,more,about,your,family]) :- family(X),member(X,List).
+pat(List, Rand_fam_resp) :- family(X),member(X,List).
 pat(Anything,[tell,me,more,"."]).
 
+family(family).
 family(sister).
 family(brother).
 family(sibling).
@@ -20,6 +21,27 @@ family(grandmother).
 family(grandma).
 family(neice).
 family(nephew).
+
+Rand_fam_resp :-  N is random(4),
+                  nth0(N, [
+                  "Tell me more about your family.",
+                  "How would you describe your family?",
+                  "Do you have a good relationship with your parents?",
+                  Rand_response,
+                  "], Elem),
+                  write(Elem).
+
+Rand_response :- N is random(4),
+                  nth0(N, [
+                  "Tell me more.",
+                  "Go on",
+                  "Why?",
+                  "How has the last month been going for you?",
+                  "Please continue."
+                  "], Elem),
+                  write(Elem).
+
+
 
 out([]) :- nl.
 out([Head|Tail]) :- write(Head),write(' '),out(Tail).
