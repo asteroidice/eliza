@@ -150,7 +150,7 @@ in(List) :- read_string(InputL),
 
 talk(Output,UserInput) :- out(Output),in(UserInput).
 
-eliza :- rap(['Hey there, I\'m Eliza. How are you feeling right now?']).
+eliza :- rap(['Hey there, I\'m Eliza. How are you feeling right now? (please use lower case and no punctuation for your input)']).
 
 rap([bye]) :- write("I look forward to seeing you at our next session. Good bye.").
 rap(Output) :-
