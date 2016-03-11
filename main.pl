@@ -3,6 +3,7 @@ pat([hello | _ ], [hello, there]).
 pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
 pat(List, ["What exactly is making you feel sad?"]) :- member(sad,List).
 pat(List, ["What seems to be making you upset?"]) :- upset(X),member(X,List).
+pat(List, Y) :- rand_work_resp(Y),work(X),member(X,List).
 pat([i,am | Rest],[why, are, you | Rest]).
 pat(Anything,X) :- rand_response(X).
 
@@ -39,6 +40,23 @@ upset(maddening).
 upset(angering).
 upset(infuriating).
 
+work(job).
+work(work).
+work(career).
+work(paid).
+work(salary).
+work(boss).
+work(intern).
+
+rand_work_resp(R) :- rand_response(x), N is random(6),
+                  nth0(N, [
+                    ["Is there a problem at work?"],
+                    ["Do you enjoy what you do at work?"],
+                    ["What does your job entail?"],
+                    ["Do you find yourself spending all of time in the office?"],
+                    ["How do you feel about your Boss?"],
+                    X
+                  ], R).
 rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   nth0(N, [
                   ["Tell", me, more, about, your, family],
