@@ -1,10 +1,10 @@
 pat([bye],[bye]).
 pat([hello | _ ], [hello, there]).
-pat([i,am | Rest],[why, are, you | Rest]).
 pat(List, Y) :- rand_fam_resp(Y),family(X),member(X,List).
-pat(List, ["Why are you feeling sad?"]) :- member(sad,List).
-pat(List, ["What is making you upset?"]) :- upset(X),member(X,List).
-pat(Anything,[tell,me,more,"."]).
+pat(List, ["What exactly is making you feel sad?"]) :- member(sad,List).
+pat(List, ["What seems to be making you upset?"]) :- upset(X),member(X,List).
+pat([i,am | Rest],[why, are, you | Rest]).
+pat(Anything,X) :- rand_response(X).
 
 family(family).
 family(sister).
@@ -47,7 +47,7 @@ rand_fam_resp(Elem) :- rand_response(X), N is random(4),
                   X
                   ], Elem).
 
-rand_response(Elem) :- starterq(X), N is random(4),
+rand_response(Elem) :- starterq(X), N is random(10),
                   nth0(N, [
                   ["Tell me more."],
                   ["Go on"],
@@ -61,13 +61,13 @@ rand_response(Elem) :- starterq(X), N is random(4),
                   X
                   ], Elem).
 
-starterq(Elem) :- N is random(4),
+starterq(Elem) :- N is random(5),
                   nth0(N, [
                   ["Help me I'm trapped in a computer!"],
                   ["How are things going with you?"],
                   ["What brings you here today?"],
                   ["What problem brings you here today?"],
-                  ["What are you thinking?"],
+                  ["What are you thinking?"]
                   ], Elem).
 
 
@@ -84,7 +84,7 @@ char_to_array(-1,[]) :- !.
 char_to_array(X,[X|Rest]) :- read_string(Rest).
 
 
-in(List) :- read_string(InputLU),
+in(List) :- read_string(InputL),
   atom_chars(InputS,InputL),
   atomic_list_concat(List," ",InputS),
   %atomic_list_concat(InputP,".",InputS),
